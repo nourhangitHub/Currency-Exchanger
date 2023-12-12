@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development'
+import { Observable } from 'rxjs';
+import { RatesResponse, ConvertResponse, ConvertObject } from '../interfaces/rates-response';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,22 @@ export class ApiServiceService {
   constructor(private http: HttpClient) {}
 
    // get Exchange Rates
-   getExchangeRates(): Observable<any[]> {
-    return this.http.get<any>(`${this.URL}/latest`,{
+   getExchangeRates(): Observable<RatesResponse> {
+    return this.http.get<RatesResponse>(`${this.URL}/latest`,{
         params: {
           access_key: environment.API_Key,
         },
     });
+  }
+
+  convertAmount(requestObject: ConvertObject) : Observable<ConvertResponse>{
+    return this.http.get<ConvertResponse>(`${this.URL}/convert`,{
+      params: {
+        access_key: environment.API_Key,
+        from : requestObject.from,
+        to: requestObject.to,
+        amount: Number(requestObject.amount)
+      },
+  });
   }
 }

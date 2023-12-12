@@ -1,1 +1,40 @@
-<p>exchange-form works!</p>
+
+  <form class="exchange-form" [formGroup]="exchangeForm" (ngSubmit)="submitForm()">
+    <div class="left-side">
+      <mat-form-field class="example-full-width">
+        <mat-label>Amount</mat-label>
+        <input type="number" min="1" formControlName="amount" matInput placeholder="Enter Amount">
+        <mat-hint>Set Amount First</mat-hint>
+        <mat-error *ngIf="form['amount'].hasError('required')">
+          Amount is required
+        </mat-error>
+        <mat-error *ngIf="form['amount'].hasError('min')">
+          Enter valid amount
+        </mat-error>
+      </mat-form-field>
+      <div> 1 EUB = xxxx usd </div>
+    </div>
+    <div class="right-side">
+      <section class="exchange-section">
+        <mat-form-field>
+          <mat-label>Form</mat-label>
+          <mat-select formControlName="from" [disabled]="form['amount'].hasError('required')">
+            <mat-option *ngFor="let rate of rateList" [value]="rate">{{rate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-fab extended color="primary" (click)="exchangeRate()">
+          <mat-icon>sync-alt</mat-icon>     
+          <span>Switch</span>
+        </button>
+        <mat-form-field>
+          <mat-label>To</mat-label>
+          <mat-select formControlName="to" [disabled]="form['amount'].hasError('required')">
+            <mat-option *ngFor="let rate of rateList" [value]="rate">{{rate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </section>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form['amount'].hasError('required')">Convert</button>
+
+    </div>
+  </form>
+
