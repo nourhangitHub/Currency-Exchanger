@@ -1,0 +1,16 @@
+.exchange-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 20px;
+    .right-side{
+        display: flex;
+        flex-direction: column;
+        .exchange-icon{
+            height: 60px;
+        }
+    }
+}
