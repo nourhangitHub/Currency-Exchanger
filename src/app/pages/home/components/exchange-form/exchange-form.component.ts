@@ -13,6 +13,8 @@ import { ApiServiceService } from 'src/app/core/services/api-service.service';
 export class ExchangeFormComponent implements OnInit {
   exchangeForm!: FormGroup;
   rateList: string[] = [];
+  rates!: any;
+  rate!: any;
   constructor(
     private formBuilder: FormBuilder,
     private apiServiceService : ApiServiceService, 
@@ -22,16 +24,28 @@ export class ExchangeFormComponent implements OnInit {
     this.buildProfileForm();
     this.activatedRoute.data.subscribe(
       ({rates}) => {
+        this.rates = rates.rates;
+        this.rate = Object.entries(this.rates).find(rate => rate[0] === this.form['to'].value);
         this.rateList = Object.keys(rates.rates)
       });
+      
+    this.fireWhenUpdateAmount();
+    this.fireWhenUpdateRate();
+  }
 
-      this.form['amount'].valueChanges.subscribe(() => {
-        console.log(this.form['amount'].hasError('required') && this.form['amount'].hasError('min'))
-        if(!this.form['amount'].hasError('required') && !this.form['amount'].hasError('min')){
-            this.form['from'].enable();
-            this.form['to'].enable();
-        }
-      })
+  fireWhenUpdateAmount(){
+    this.form['amount'].valueChanges.subscribe(() => {
+      if(!this.form['amount'].hasError('required')){
+          this.form['from'].enable();
+          this.form['to'].enable();
+      }
+    })
+  }
+
+  fireWhenUpdateRate(){
+    this.form['to'].valueChanges.subscribe(res => {
+      this.rate = Object.entries(this.rates).find(rate => rate[0] === this.form['to'].value);
+    })
   }
 
   buildProfileForm(): void {

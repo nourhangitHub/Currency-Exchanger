@@ -12,10 +12,13 @@
           Enter valid amount
         </mat-error>
       </mat-form-field>
-      <div> 1 EUB = xxxx usd </div>
+      
+        <button mat-raised-button >
+          <span class="text-primary">1 EUR =  {{rate[1]}} {{form['to'].value}}</span>
+        </button>
     </div>
     <div class="right-side">
-      <section class="exchange-section">
+      <section class="exchange-section d-flex flex-row justify-content-between">
         <mat-form-field>
           <mat-label>Form</mat-label>
           <mat-select formControlName="from" [disabled]="form['amount'].hasError('required')">
@@ -34,7 +37,12 @@
         </mat-form-field>
       </section>
       <button mat-raised-button color="primary" type="submit" [disabled]="form['amount'].hasError('required')">Convert</button>
-
+      <section class="result-section d-flex flex-row justify-content-between">
+        <button mat-raised-button >
+          <span class="text-primary">XX.XXXX {{form['to'].value}}</span>
+        </button>
+        <button mat-raised-button color="primary">More Details</button>
+      </section>
     </div>
   </form>
 
