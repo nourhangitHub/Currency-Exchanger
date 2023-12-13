@@ -6,11 +6,20 @@
     padding: 20px;
     margin: 20px;
     border-radius: 20px;
+    min-height: 55dvh;
     .right-side{
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        min-width: 50dvw;
         .exchange-icon{
             height: 60px;
         }
+    }
+    .left-side{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 25dvw;
     }
 }
