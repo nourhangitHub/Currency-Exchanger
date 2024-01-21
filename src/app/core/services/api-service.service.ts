@@ -14,20 +14,17 @@ export class ApiServiceService {
 
    // get Exchange Rates
    getExchangeRates(): Observable<RatesResponse> {
-    return this.http.get<RatesResponse>(`${this.URL}/latest`,{
-        params: {
-          access_key: environment.API_Key,
-        },
-    });
+    return this.http.get<RatesResponse>(`${this.URL}/latest`);
   }
 
   convertAmount(requestObject: ConvertObject) : Observable<ConvertResponse>{
     return this.http.get<ConvertResponse>(`${this.URL}/convert`,{
       params: {
-        access_key: environment.API_Key,
         from : requestObject.from,
         to: requestObject.to,
-        amount: Number(requestObject.amount)
+        amount: requestObject.amount,
+        date: requestObject.date,
+        base: requestObject.base
       },
   });
   }

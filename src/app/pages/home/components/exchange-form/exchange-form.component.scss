@@ -23,3 +23,10 @@
         min-width: 25dvw;
     }
 }
+
+.error{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
