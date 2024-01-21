@@ -1,5 +1,5 @@
 
-  <form class="exchange-form" [formGroup]="exchangeForm" (ngSubmit)="submitForm()">
+  <form class="exchange-form" [formGroup]="exchangeForm" (ngSubmit)="submitForm()" *ngIf="rates">
     <div class="left-side">
       <mat-form-field class="example-full-width">
         <mat-label>Amount</mat-label>
@@ -45,4 +45,9 @@
       </section>
     </div>
   </form>
+
+  <div class="alert alert-danger error" role="alert" *ngIf="error">
+    <h2>{{error.error.code}}</h2>
+    <p>{{error.error.info}}</p>
+  </div>
 

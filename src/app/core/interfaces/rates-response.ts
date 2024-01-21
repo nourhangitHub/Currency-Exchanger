@@ -9,7 +9,9 @@ export interface RatesResponse {
 export interface ConvertObject {
     from: string,
     to: string,
-    amount: number
+    amount: string,
+    date :  string,
+    base : string,
 }
 
 export interface ConvertResponse {
@@ -19,4 +21,14 @@ export interface ConvertResponse {
      historical : string,
      date :  string 
      result : number
+}
+
+export interface ErrorResponse{
+    error: ErrorInfo,
+    success: boolean
+}
+
+export interface ErrorInfo{
+    code: number,
+    info: string
 }
